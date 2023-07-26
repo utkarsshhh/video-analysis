@@ -1,17 +1,17 @@
 <div class="card card-file">
     <div class="card-body" style="background-color: whitesmoke;">
         <p style="font-weight: bold;">Upload Video</p>
-        <form>
+        <form (submit) = "submitVideo($event)">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Upload</span>
             </div>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01">
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              <input type="file" class="custom-file-input" id="file01" (change) = 'fileUpload($event)' [(ngModel)] = 'file01' name = 'file01'>
+              <label class="custom-file-label" for="file01">Choose file</label>
             </div>
           </div>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         <p style="text-align: center; font-size: xx-large;">
             Or
@@ -22,7 +22,7 @@
         <form (submit) = "submitLink($event)">
             <div class="form-group">
                 <label for="exampleInputEmail1">Youtube Link</label>
-                <input type="url" class="form-control" id='tubeUrl' aria-describedby="emailHelp"
+                <input type="email" class="form-control" id='tubeUrl' aria-describedby="emailHelp"
                  placeholder="Enter URL" [(ngModel)] = 'tubeUrl' name = 'tubeUrl' required />
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
