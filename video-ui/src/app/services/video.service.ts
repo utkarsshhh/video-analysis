@@ -11,4 +11,7 @@ export class VideoService {
   uploadLink(link:any){
     return this.http.post(this.server_link+'upload_link',link)
   }
+  uploadVideo(file:File){
+    
+  }
 }
