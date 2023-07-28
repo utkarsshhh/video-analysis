@@ -37,13 +37,14 @@ export class UploadComponent implements OnInit {
     console.log("upload video ",this.file01)
     if (this.file01?.type.includes('video')){
       console.log('video')
+      this.service.uploadVideo(this.file01).subscribe( res=> console.log(res))
     }
     else{
       alert("Please upload a video")
     }
   }
   fileUpload(event:any){
-    console.log(event?.target?.files[0].type)
+    console.log(" file 1 ",event?.target?.files[0].type)
     this.file01 = event?.target?.files[0]
     if (event?.target?.files[0].type.includes('video')){
       console.log('video')

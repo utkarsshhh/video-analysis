@@ -13,5 +13,12 @@ def upload_link():
     print ("link ",link)
     return '200'
 
+@app.route('/upload_video',methods = ['POST'])
+def upload_video():
+    file1 = request.files[0]
+    video_file = VideoFileClip(file1)
+    return '200'
+
+
 if (__name__=='__main__'):
     app.run()
