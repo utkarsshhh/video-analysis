@@ -2,8 +2,15 @@ from flask import Flask, request
 from flask_cors import CORS
 from moviepy.editor import *
 import openai
+import speech_recognition as sr
 app = Flask(__name__)
 CORS(app)
+
+def read_movie(movie):
+    video = VideoFileClip(movie)
+    audio_file = video.audio
+    audio_file.write_audiofile('mymovie.wav')
+    r = sr.Recognizer()
 
 
 @app.route('/upload_link',methods = ['POST'])
