@@ -37,7 +37,8 @@ export class UploadComponent implements OnInit {
     console.log("upload video ",this.file01)
     if (this.file01?.type.includes('video')){
       console.log('video')
-      this.service.uploadVideo(this.file01).subscribe( res=> console.log(res))
+      this.service.uploadVideo(this.file01).subscribe( res=> {console.log(res)}
+      ,err => {console.log("error  ",err)})
     }
     else{
       alert("Please upload a video")
