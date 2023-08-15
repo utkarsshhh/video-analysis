@@ -12,6 +12,9 @@ export class UploadComponent implements OnInit {
   tubeUrl: any = ''
   // file01: File | undefined;
   file01: any 
+  finalFile: any
+  form1 = new FormData()
+  r = new FileReader()
   submitLink(event: Event) {
     console.log("inside submit link")
     if (this.tubeUrl == '') {
@@ -35,12 +38,17 @@ export class UploadComponent implements OnInit {
   }
 
   submitVideo(event: Event) {
-    console.log("upload video ", this.file01)
-    // if (this.file01?.type.includes('video')) {
-      if (true){
+    console.log("upload video ", this.finalFile)
+    if (this.file01?.type.includes('video')) {
+      // if (true){
       console.log('video')
-      this.service.uploadVideo(this.file01).subscribe(res => { console.log('respnse   ', res) }
-        , err => { console.log("error  ", err) })
+      this.finalFile = this.r.result
+      this.form1.set('file1',this.finalFile)
+      // console.log(this.form1.get('file1'),"  m")
+    
+      this.service.uploadVideo(this.form1).subscribe(res => { console.log('respnse   ', res) }
+        // , err => { console.log("error  ", err.message) }
+        )
     }
     else {
       alert("Please upload a video")
@@ -49,13 +57,24 @@ export class UploadComponent implements OnInit {
   fileUpload(event: any) {
     console.log(" file 1 ", event?.target?.files[0].type)
     this.file01 = event?.target?.files[0]
-    // if (event?.target?.files[0].type.includes('video')) {
-    //   if (1){
-    //   console.log('video')
-    // }
-    // else {
-    //   alert("Please upload a video")
-    // }
+    this.r.readAsArrayBuffer(this.file01)
+    
+    // const promi = new Promise((resolve,reject) =>{
+    //   console.log("inside       ")
+    //   resolve(r.readAsArrayBuffer(this.file01))
+    // })
+    // promi.then((resolve)=>{
+    //   console.log("inside promise")
+    //   
+    // })
+    // r.readAsArrayBuffer(this.file01);
+    // this.file01 = r.result
+    if (event?.target?.files[0].type.includes('video')) {
+      console.log('video')
+  }
+    else {
+      alert("Please upload a video")
+    }
   }
   ngOnInit(): void {
   }
