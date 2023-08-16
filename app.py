@@ -1,10 +1,12 @@
 from flask import Flask, request
 from flask_cors import CORS
-from moviepy.editor import *
+# from moviepy.editor import *
+from moviepy.video.io.VideoFileClip import VideoFileClip
 import openai
-import cv2
+from pytube import YouTube
 from youtube_transcript_api import YouTubeTranscriptApi
 import speech_recognition as sr
+import numpy as np
 app = Flask(__name__)
 CORS(app)
 
@@ -45,18 +47,29 @@ def upload_link():
 
 @app.route('/upload_video',methods = ['POST'])
 def upload_video():
-    # print ("hello")
+    print ("hello")
     file1 = request.form
-    print (file1['file1'])
-    # print ("before video clip")
-    # video_file = VideoFileClip('movie1.mov')
-    # print ("after video clip"
-    FILE_OUTPUT = 'outvid.mov'
-    with open(FILE_OUTPUT, "w") as out_file:
-        out_file.write(file1['file1'])
+    video = request.files['video']
+    vid_name = video.filename
+    print (video.filename)
+    if ('.mp4' in vid_name):
+        video.save('testvid.mp4')
+        video = VideoFileClip('testvid.mp4')
+    elif ('.mov' in vid_name):
+        video.save('testvid.mov')
+        video = VideoFileClip('testvid.mov')
 
-    video = VideoFileClip('outvid.mov')
     audio_file = video.audio
+    audio_file.write_audiofile("test_audio.wav")
+    r = sr.Recognizer()
+
+    # Load the audio file
+    with sr.AudioFile("test_audio.wav") as source:
+        data = r.record(source)
+
+    # Convert speech to text
+    text = r.recognize_google(data)
+    print(text)
     print ("before 200")
     return '200'
 

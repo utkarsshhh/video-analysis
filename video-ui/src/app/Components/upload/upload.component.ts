@@ -43,8 +43,10 @@ export class UploadComponent implements OnInit {
       // if (true){
       console.log('video')
       this.finalFile = this.r.result
-      this.form1.set('file1',this.finalFile)
-      // console.log(this.form1.get('file1'),"  m")
+
+      this.form1.append('video',this.file01)
+
+      console.log(this.form1.get('fil1'),"  m")
     
       this.service.uploadVideo(this.form1).subscribe(res => { console.log('respnse   ', res) }
         // , err => { console.log("error  ", err.message) }
