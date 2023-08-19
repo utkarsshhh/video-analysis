@@ -16,6 +16,11 @@ def read_movie(movie):
     audio_file.write_audiofile('mymovie.wav')
     r = sr.Recognizer()
 
+@app.route('/get_transcript',methods = ['GET'])
+def get_transcript():
+    with open('transcript.txt') as reader:
+        transcript = reader.read()
+        return {'transcript':transcript}
 
 @app.route('/upload_link',methods = ['POST'])
 def upload_link():
@@ -43,6 +48,10 @@ def upload_link():
     for i in complete_transcript:
         transcript_string += i['text'] + ' '
     print (transcript_string)
+    with open('transcript.txt','w') as writer:
+        writer.write(transcript_string)
+
+    return {'transcript':transcript_string}
     return '200'
 
 @app.route('/upload_video',methods = ['POST'])
@@ -70,6 +79,8 @@ def upload_video():
     # Convert speech to text
     text = r.recognize_google(data)
     print(text)
+    with open('transcript.txt','w') as writer:
+        writer.write(text)
     print ("before 200")
     return '200'
 

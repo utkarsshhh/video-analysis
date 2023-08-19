@@ -1,0 +1,13 @@
+h2 {
+    padding: 3px;
+}
+p{
+    margin: 5px;
+}
+.download-button {
+    margin-left: 6px;
+}
+.summary-button{
+    float: right;
+    margin-right:6px
+}

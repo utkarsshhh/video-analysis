@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { VideoService } from 'src/app/services/video.service';
+import { TranscriptService } from 'src/app/transcript.service';
 
 @Component({
   selector: 'app-upload',
@@ -8,13 +10,14 @@ import { VideoService } from 'src/app/services/video.service';
 })
 export class UploadComponent implements OnInit {
 
-  constructor(private service: VideoService) { }
+  constructor(private service: VideoService,private transc:TranscriptService,private router:Router) { }
   tubeUrl: any = ''
   // file01: File | undefined;
   file01: any 
   finalFile: any
   form1 = new FormData()
   r = new FileReader()
+  transcript:any
   submitLink(event: Event) {
     console.log("inside submit link")
     if (this.tubeUrl == '') {
@@ -24,7 +27,15 @@ export class UploadComponent implements OnInit {
     else {
       this.service.uploadLink({ "link": this.tubeUrl }).subscribe(
         data => {
-          console.log(data)
+          // this.transcript = data
+          // console.log(this.transcript)
+          // this.transc.setTranscript(this.transcript['transcript'])
+//           var FileSaver = require('file-saver');
+// var blob = new Blob([this.transcript['transcript']], {type: "text/plain;charset=utf-8"});
+// FileSaver.saveAs(blob, "transcript.txt");
+//           console.log(this.transcript['transcript'])
+          this.router.navigate(['transcript'])
+          
         },
         err => {
           console.log(err)
@@ -48,7 +59,7 @@ export class UploadComponent implements OnInit {
 
       console.log(this.form1.get('fil1'),"  m")
     
-      this.service.uploadVideo(this.form1).subscribe(res => { console.log('respnse   ', res) }
+      this.service.uploadVideo(this.form1).subscribe(res => { this.router.navigate(['transcript']) }
         // , err => { console.log("error  ", err.message) }
         )
     }
