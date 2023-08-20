@@ -84,6 +84,12 @@ def upload_video():
     print ("before 200")
     return '200'
 
+@app.route('/generate_summary',methods = ['GET'])
+def generate_summary():
+    with open('apiKey.txt','r') as reader:
+        openai.api_key = reader.read()
+
+
 
 if (__name__=='__main__'):
     app.run()

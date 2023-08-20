@@ -7,13 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UploadComponent } from './Components/upload/upload.component';
-import { TranscriptComponent } from './Components/transcript/transcript.component'
+import { TranscriptComponent } from './Components/transcript/transcript.component';
+import { SummaryComponent } from './Components/summary/summary.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadComponent,
-    TranscriptComponent
+    TranscriptComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
