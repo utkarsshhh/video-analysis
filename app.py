@@ -88,6 +88,16 @@ def upload_video():
 def generate_summary():
     with open('apiKey.txt','r') as reader:
         openai.api_key = reader.read()
+    with open('transcript.txt','r') as reader:
+        transcripts = reader.read()
+    system_msg = 'You know how to create the summary of a text'
+    user_msg = transcripts
+    response = openai.ChatCompletion.create(model ="gpt-3.5-turbo",
+                                            messages = [{"role":'system',"content":system_msg},
+                                                        {"role":'user',"content":user_msg}])
+    print (response["choices"][0]["finish_reason"])
+    print ("\n")
+    print (response["choices"][0]["message"]["content"])
 
 
 
