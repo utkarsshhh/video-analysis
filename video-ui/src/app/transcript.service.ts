@@ -25,4 +25,7 @@ export class TranscriptService {
   getTranscript():Observable<any>{
    return this.http.get(this.server_link+'get_transcript')
   }
+  getSummary():Observable<any>{
+    return this.http.get(this.server_link+'get_summary')
+  }
 }
