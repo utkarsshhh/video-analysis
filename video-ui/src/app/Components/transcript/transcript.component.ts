@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranscriptService } from 'src/app/transcript.service';
 
 @Component({
@@ -8,9 +9,12 @@ import { TranscriptService } from 'src/app/transcript.service';
 })
 export class TranscriptComponent implements OnInit {
 transcript = this.transc.getTranscript()
-  constructor(private transc: TranscriptService) {
+  constructor(private transc: TranscriptService,private router:Router) {
    }
   transcript1: any
+  navigate(event:Event){
+    this.router.navigate(['summary'])
+  }
   
   ngOnInit(): void {
     this.transc.getTranscript().subscribe(data => {

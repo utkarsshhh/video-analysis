@@ -1,1 +1,9 @@
-<p>summary works!</p>
+
+<div *ngIf = "summary==''">
+The summary is being generated...
+</div>
+<div *ngIf = "summary!=''">
+    <h3 style="font-weight:bold ;">Summary</h3>
+<br>
+{{summary}}
+</div>

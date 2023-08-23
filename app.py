@@ -97,7 +97,9 @@ def generate_summary():
                                                         {"role":'user',"content":user_msg}])
     print (response["choices"][0]["finish_reason"])
     print ("\n")
-    print (response["choices"][0]["message"]["content"])
+    j = response["choices"][0]["message"]["content"]
+    print (j)
+    return {'summary':j}
 
 
 
